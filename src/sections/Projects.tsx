@@ -1,0 +1,41 @@
+import { ArrowUpRight } from "lucide-react";
+import { projects } from "../data/projects";
+import { personal } from "../data/personal";
+import { Container } from "../components/Container";
+import { SectionHeading } from "../components/SectionHeading";
+import { ProjectCard } from "../components/ProjectCard";
+import { Button } from "../components/Button";
+
+export function Projects() {
+  return (
+    <section
+      id="projects"
+      className="py-24 md:py-32"
+      style={{ backgroundColor: "var(--bg-secondary)" }}
+    >
+      <Container>
+        <SectionHeading
+          eyebrow="Projects"
+          title="Things I've built"
+        />
+
+        <div className="grid gap-5 sm:grid-cols-2">
+          {projects.map((project, i) => (
+            <ProjectCard key={project.name} project={project} index={i} />
+          ))}
+        </div>
+
+        <div className="mt-10 flex justify-center">
+          <Button
+            href={personal.social.github}
+            variant="secondary"
+            external
+          >
+            View GitHub
+            <ArrowUpRight size={16} />
+          </Button>
+        </div>
+      </Container>
+    </section>
+  );
+}
