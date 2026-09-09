@@ -8,9 +8,8 @@ export function Ventures() {
     <section id="ventures" className="py-24 md:py-32">
       <Container>
         <SectionHeading
-          eyebrow="Ventures"
-          title="Ventures"
-          subtitle="Ideas I'm building into something bigger."
+          title="Building ventures, not just projects."
+          subtitle="Ventures are ideas actively being developed into independent, sustainable businesses."
         />
 
         <div className="grid gap-5 sm:grid-cols-2">

@@ -10,13 +10,11 @@ export function Projects() {
   return (
     <section
       id="projects"
-      className="py-24 md:py-32"
-      style={{ backgroundColor: "var(--bg-secondary)" }}
+      className="py-24 md:py-32 bg-[var(--bg-secondary)] border-t border-[var(--border-secondary)]"
     >
       <Container>
         <SectionHeading
-          eyebrow="Projects"
-          title="Things I've built"
+          title="Things I've built."
         />
 
         <div className="grid gap-5 sm:grid-cols-2">

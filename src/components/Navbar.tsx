@@ -34,23 +34,21 @@ export function Navbar({ isDark, toggleTheme }: NavbarProps) {
 
   return (
     <header
-      className="fixed top-0 right-0 left-0 z-50 transition-all duration-500"
+      className="fixed top-0 right-0 left-0 z-50 transition-all duration-300"
       style={{
-        backgroundColor: scrolled ? "rgba(3, 3, 5, 0.75)" : "transparent",
-        backdropFilter: scrolled ? "blur(20px)" : "none",
-        WebkitBackdropFilter: scrolled ? "blur(20px)" : "none",
-        borderBottom: scrolled ? "1px solid rgba(0, 240, 255, 0.15)" : "1px solid transparent",
-        boxShadow: scrolled ? "0 4px 30px rgba(0, 240, 255, 0.05)" : "none",
+        backgroundColor: scrolled ? "var(--bg-nav)" : "transparent",
+        backdropFilter: scrolled ? "blur(12px)" : "none",
+        WebkitBackdropFilter: scrolled ? "blur(12px)" : "none",
+        borderBottom: scrolled ? "1px solid var(--border-primary)" : "1px solid transparent",
       }}
     >
       <Container>
-        <nav className="flex h-16 items-center justify-between" role="navigation" aria-label="Main navigation">
+        <nav className={`flex transition-all duration-300 items-center justify-between ${scrolled ? 'h-14' : 'h-20'}`} role="navigation" aria-label="Main navigation">
           {/* Logo */}
           <a
             href="#home"
-            className="flex items-center gap-2 text-sm font-black tracking-[0.25em] uppercase text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]"
+            className="flex items-center gap-2 text-sm font-bold tracking-widest uppercase text-[var(--text-primary)]"
           >
-            <div className="h-2 w-2 rounded-full bg-accent shadow-[0_0_8px_currentColor] animate-pulse-slow" />
             SANTOSH
           </a>
 
@@ -60,19 +58,18 @@ export function Navbar({ isDark, toggleTheme }: NavbarProps) {
               <a
                 key={href}
                 href={href}
-                className="relative group rounded-md px-4 py-2 text-xs font-bold tracking-widest uppercase transition-colors duration-300 text-secondary hover:text-white"
+                className="rounded-md px-4 py-2 text-xs font-medium text-[var(--text-secondary)] transition-colors duration-200 hover:text-[var(--text-primary)] hover:bg-[var(--bg-card)]"
               >
                 {label}
-                <span className="absolute bottom-0 left-1/2 h-[2px] w-0 -translate-x-1/2 bg-accent shadow-[0_0_8px_currentColor] transition-all duration-300 group-hover:w-3/4 opacity-0 group-hover:opacity-100" />
               </a>
             ))}
           </div>
 
           {/* Right side */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             <button
               onClick={toggleTheme}
-              className="flex items-center justify-center rounded-lg p-2.5 transition-all duration-300 text-secondary hover:text-accent hover:bg-white/5 border border-transparent hover:border-accent/20"
+              className="flex items-center justify-center rounded-md p-2 text-[var(--text-secondary)] transition-colors duration-200 hover:text-[var(--text-primary)] hover:bg-[var(--bg-card)]"
               aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
               type="button"
             >
@@ -80,18 +77,18 @@ export function Navbar({ isDark, toggleTheme }: NavbarProps) {
             </button>
 
             <Button href="#contact" variant="primary" size="sm" className="hidden md:inline-flex">
-              INITIATE
+              Let's Connect
             </Button>
 
             {/* Mobile hamburger */}
             <button
-              className="flex items-center justify-center rounded-lg p-2.5 lg:hidden text-white hover:text-accent transition-colors duration-300"
+              className="flex items-center justify-center rounded-md p-2 lg:hidden text-[var(--text-primary)] hover:bg-[var(--bg-card)] transition-colors duration-200"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileOpen}
               type="button"
             >
-              {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+              {mobileOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
         </nav>
@@ -101,33 +98,35 @@ export function Navbar({ isDark, toggleTheme }: NavbarProps) {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -10, backdropFilter: "blur(0px)" }}
-            animate={{ opacity: 1, y: 0, backdropFilter: "blur(20px)" }}
-            exit={{ opacity: 0, y: -10, backdropFilter: "blur(0px)" }}
-            transition={{ duration: 0.3 }}
-            className="absolute top-16 left-0 right-0 border-b border-accent/20 bg-[#030305]/95 lg:hidden shadow-[0_10px_30px_rgba(0,0,0,0.8)]"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            className="absolute top-full left-0 right-0 border-b border-[var(--border-primary)] bg-[var(--bg-primary)] lg:hidden shadow-lg"
           >
             <Container className="py-6">
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-1">
                 {navItems.map(({ label, href }) => (
                   <a
                     key={href}
                     href={href}
                     onClick={() => setMobileOpen(false)}
-                    className="rounded-lg px-4 py-3.5 text-xs font-bold tracking-widest uppercase transition-colors duration-200 text-secondary hover:text-white hover:bg-white/5 hover:shadow-[inset_2px_0_0_var(--color-accent)]"
+                    className="rounded-md px-4 py-3 text-sm font-medium text-[var(--text-secondary)] transition-colors duration-200 hover:text-[var(--text-primary)] hover:bg-[var(--bg-card)]"
                   >
                     {label}
                   </a>
                 ))}
-                <Button 
-                  href="#contact" 
-                  variant="primary" 
-                  size="md" 
-                  className="mt-4 w-full"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  INITIATE CONTACT
-                </Button>
+                <div className="px-4 pt-4 mt-2 border-t border-[var(--border-primary)]">
+                  <Button 
+                    href="#contact" 
+                    variant="primary" 
+                    size="md" 
+                    className="w-full"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    Let's Connect
+                  </Button>
+                </div>
               </div>
             </Container>
           </motion.div>

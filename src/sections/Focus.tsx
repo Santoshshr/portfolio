@@ -1,73 +1,40 @@
 import { motion } from "framer-motion";
-import { Rocket, Lightbulb, Code, TrendingUp } from "lucide-react";
-import { focusItems, type FocusItem } from "../data/focus";
 import { Container } from "../components/Container";
 import { SectionHeading } from "../components/SectionHeading";
 
-const iconMap: Record<FocusItem["icon"], typeof Rocket> = {
-  rocket: Rocket,
-  lightbulb: Lightbulb,
-  code: Code,
-  "trending-up": TrendingUp,
-};
-
 export function Focus() {
+  const focusAreas = [
+    { num: "01", title: "Building products" },
+    { num: "02", title: "Exploring ventures" },
+    { num: "03", title: "Technology & systems" },
+    { num: "04", title: "Business execution" },
+  ];
+
   return (
-    <section
-      className="py-24 md:py-32"
-      style={{ backgroundColor: "var(--bg-secondary)" }}
-    >
+    <section id="focus" className="py-24 md:py-32">
       <Container>
         <SectionHeading
-          title="What I'm focused on"
-          align="center"
+          title="What I'm focused on."
         />
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {focusItems.map((item, i) => {
-            const Icon = iconMap[item.icon];
-            return (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{
-                  duration: 0.5,
-                  delay: i * 0.08,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-                className="glass-panel rounded-xl p-6 text-center transition-all duration-500"
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = "var(--border-glow)";
-                  e.currentTarget.style.boxShadow = "var(--shadow-neon)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "var(--border-primary)";
-                  e.currentTarget.style.boxShadow = "none";
-                }}
-              >
-                <div className="mb-3 flex justify-center">
-                  <Icon
-                    size={22}
-                    style={{ color: "var(--color-accent)" }}
-                  />
-                </div>
-                <p
-                  className="text-sm font-semibold"
-                  style={{ color: "var(--text-primary)" }}
-                >
-                  {item.title}
-                </p>
-                <p
-                  className="mt-1.5 text-xs leading-relaxed"
-                  style={{ color: "var(--text-tertiary)" }}
-                >
-                  {item.description}
-                </p>
-              </motion.div>
-            );
-          })}
+        <div className="mt-12 md:mt-20 flex flex-col w-full max-w-4xl">
+          {focusAreas.map((area, i) => (
+            <motion.div
+              key={area.num}
+              initial={{ opacity: 0, x: -16 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="group flex items-baseline gap-6 sm:gap-12 py-6 sm:py-8 border-b border-[var(--border-primary)] transition-colors duration-300 hover:border-[var(--text-primary)] cursor-default"
+            >
+              <span className="text-2xl sm:text-3xl md:text-4xl font-light text-[var(--text-tertiary)] transition-colors duration-300 group-hover:text-[var(--text-primary)] shrink-0">
+                {area.num}
+              </span>
+              <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tighter text-[var(--text-secondary)] transition-colors duration-300 group-hover:text-[var(--text-primary)]">
+                {area.title}
+              </h3>
+            </motion.div>
+          ))}
         </div>
       </Container>
     </section>

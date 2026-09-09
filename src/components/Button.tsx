@@ -22,26 +22,21 @@ export function Button({
   ariaLabel,
 }: ButtonProps) {
   const base =
-    "inline-flex items-center justify-center gap-2.5 font-medium transition-all duration-300 rounded-lg whitespace-nowrap relative overflow-hidden group";
+    "inline-flex items-center justify-center gap-2 font-medium transition-all duration-200 rounded-md whitespace-nowrap outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-primary)] focus-visible:ring-[var(--border-hover)]";
 
   const sizes = {
-    sm: "px-4 py-2 text-sm",
-    md: "px-6 py-3 text-sm tracking-wide",
-    lg: "px-8 py-3.5 text-base tracking-wide",
+    sm: "px-3 py-1.5 text-sm",
+    md: "px-5 py-2.5 text-sm",
+    lg: "px-6 py-3 text-base",
   };
 
   const variants = {
     primary:
-      "bg-accent text-[#030305] shadow-[0_0_15px_rgba(0,240,255,0.4)] hover:shadow-[0_0_25px_rgba(0,240,255,0.6)] hover:bg-accent-hover font-semibold",
+      "bg-[var(--text-primary)] text-[var(--bg-primary)] hover:opacity-90 shadow-sm font-semibold",
     secondary:
-      "bg-card backdrop-blur-md border border-primary text-primary hover:border-glow hover:shadow-[0_0_15px_rgba(0,240,255,0.2)]",
-    ghost: "text-secondary hover:text-primary hover:bg-white/5",
+      "bg-transparent border border-[var(--border-primary)] text-[var(--text-primary)] hover:bg-[var(--bg-card-hover)] hover:border-[var(--border-hover)]",
+    ghost: "text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-card)]",
   };
-
-  // Internal glow overlay for primary buttons
-  const renderGlow = variant === "primary" && (
-    <span className="absolute inset-0 bg-white/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-  );
 
   const classes = `${base} ${sizes[size]} ${variants[variant]} ${className}`;
 
@@ -53,8 +48,7 @@ export function Button({
         aria-label={ariaLabel}
         {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       >
-        {renderGlow}
-        <span className="relative z-10 flex items-center gap-2.5">{children}</span>
+        {children}
       </a>
     );
   }
@@ -66,8 +60,7 @@ export function Button({
       aria-label={ariaLabel}
       type="button"
     >
-      {renderGlow}
-      <span className="relative z-10 flex items-center gap-2.5">{children}</span>
+      {children}
     </button>
   );
 }
