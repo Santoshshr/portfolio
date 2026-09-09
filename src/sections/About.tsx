@@ -52,9 +52,9 @@ export function About() {
               <span className="block text-sm font-semibold tracking-wider text-[var(--text-tertiary)] mb-4">
                 {principle.num}
               </span>
-              <h4 className="text-base font-semibold text-[var(--text-primary)] mb-2 tracking-tight">
+              <h3 className="text-base font-semibold text-[var(--text-primary)] mb-2 tracking-tight">
                 {principle.title}
-              </h4>
+              </h3>
               <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
                 {principle.desc}
               </p>

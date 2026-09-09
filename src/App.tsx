@@ -1,12 +1,13 @@
+import { MotionConfig } from "framer-motion";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { Hero } from "./sections/Hero";
 import { About } from "./sections/About";
 import { Ventures } from "./sections/Ventures";
 import { Projects } from "./sections/Projects";
-import { Vision } from "./sections/Vision";
 import { Focus } from "./sections/Focus";
-import { GitHubSection } from "./sections/GitHub";
+import { Lab } from "./sections/Lab";
+import { Now } from "./sections/Now";
 import { Contact } from "./sections/Contact";
 import { useTheme } from "./hooks/useTheme";
 
@@ -14,19 +15,19 @@ export default function App() {
   const { isDark, toggle } = useTheme();
 
   return (
-    <>
+    <MotionConfig reducedMotion="user">
       <Navbar isDark={isDark} toggleTheme={toggle} />
       <main>
         <Hero />
-        <About />
+        <Focus />
         <Ventures />
         <Projects />
-        <Vision />
-        <Focus />
-        <GitHubSection />
+        <Lab />
+        <About />
+        <Now />
         <Contact />
       </main>
       <Footer />
-    </>
+    </MotionConfig>
   );
 }

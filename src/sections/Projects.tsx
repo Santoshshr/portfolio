@@ -17,7 +17,7 @@ export function Projects() {
           title="Things I've built."
         />
 
-        <div className="grid gap-5 sm:grid-cols-2">
+        <div className="flex flex-col gap-16 mt-16">
           {projects.map((project, i) => (
             <ProjectCard key={project.name} project={project} index={i} />
           ))}

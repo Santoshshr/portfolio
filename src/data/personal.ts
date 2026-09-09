@@ -22,6 +22,7 @@ export const personal = {
   social: {
     github: "https://github.com/Santoshshr",
     linkedin: "https://www.linkedin.com/in/santosh-shrestha-861120221/",
+    email: "santosh.shrestha@inocyte.com",
   },
   philosophy: {
     headline: "Build. Learn. Iterate. Repeat.",

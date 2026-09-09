@@ -4,30 +4,41 @@ export interface Project {
   technologies: string[];
   githubUrl?: string;
   liveUrl?: string;
-  status?: "Active" | "Completed" | "In Progress" | "Archived";
-  featured?: boolean;
+  status?: string;
+  caseStudy?: {
+    problem: string;
+    idea: string;
+    build: string;
+    result: string;
+  };
 }
 
-/**
- * Add new projects by appending to this array.
- * Do not invent projects — use real ones or clear placeholders.
- */
 export const projects: Project[] = [
   {
-    name: "Personal Website",
-    description:
-      "This website — a production-ready personal founder site built with React, TypeScript, and Vite. Deployed on GitHub Pages.",
-    technologies: ["React", "TypeScript", "Vite", "Tailwind CSS", "Framer Motion"],
-    githubUrl: "https://github.com/Santoshshr",
-    status: "Active",
-    featured: true,
+    name: "Portfolio V2",
+    description: "A premium, fully static portfolio designed to showcase ventures and projects with a high-end product aesthetic.",
+    technologies: ["React", "TypeScript", "Vite", "Tailwind CSS"],
+    githubUrl: "https://github.com/Santoshshr/portfolio",
+    liveUrl: "https://santoshshr.github.io/portfolio",
+    status: "Completed",
+    caseStudy: {
+      problem: "Standard developer portfolios fail to communicate entrepreneurial ability and product thinking.",
+      idea: "Create a narrative-driven experience that positions the creator as a founder who turns ideas into real businesses.",
+      build: "Designed a custom React/Vite architecture with deep Tailwind configurations, Framer Motion interactions, and fully static GitHub Pages deployment.",
+      result: "A highly performant, visually striking digital identity that loads instantly and stands out to founders and investors.",
+    }
   },
   {
-    name: "Project Placeholder",
-    description:
-      "Update this entry with a real project. Replace the name, description, technologies, and links.",
-    technologies: ["Technology"],
-    status: "In Progress",
-    featured: false,
+    name: "Terminal AI CLI",
+    description: "An experimental command-line tool that brings local LLM capabilities directly to the developer workflow.",
+    technologies: ["Rust", "OpenAI API", "CLI"],
+    githubUrl: "#",
+    status: "Experiment",
+    caseStudy: {
+      problem: "Switching context between the terminal and browser-based AI chats disrupts developer flow.",
+      idea: "Integrate LLM assistance directly into the terminal, allowing developers to query, debug, and generate code without leaving their environment.",
+      build: "Built using Rust for absolute performance, interfacing with OpenAI's API, and parsing standard output natively.",
+      result: "Reduced context-switching time significantly and created a seamless layer for rapid prototyping.",
+    }
   },
 ];

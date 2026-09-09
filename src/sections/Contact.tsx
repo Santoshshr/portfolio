@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { Mail } from "lucide-react";
 import { LinkedinIcon as Linkedin } from "../components/icons";
 import { personal } from "../data/personal";
 import { Container } from "../components/Container";
@@ -7,9 +7,9 @@ import { Container } from "../components/Container";
 export function Contact() {
   const contactLinks = [
     {
-      label: "Connect with me",
-      href: personal.social.linkedin,
-      icon: <ArrowRight size={18} />,
+      label: "Start a conversation",
+      href: `mailto:${personal.social.email}`,
+      icon: <Mail size={18} />,
       primary: true,
     },
     {
@@ -31,11 +31,11 @@ export function Contact() {
           className="surface-card mx-auto max-w-4xl overflow-hidden rounded-2xl p-8 sm:p-12 md:p-16 flex flex-col md:flex-row items-center justify-between gap-10"
         >
           <div className="md:w-1/2 text-center md:text-left">
-            <h2 className="text-3xl font-bold tracking-tight text-[var(--text-primary)] sm:text-4xl">
-              Have an idea worth building?
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-[var(--text-primary)]">
+              HAVE AN IDEA?
             </h2>
-            <p className="mt-4 text-[var(--text-secondary)] leading-relaxed">
-              I'm always interested in ambitious ideas, interesting problems, and opportunities to build something meaningful.
+            <p className="mt-4 text-xl md:text-2xl text-[var(--text-secondary)] leading-relaxed font-medium">
+              Let's build it.
             </p>
           </div>
 

@@ -1,3 +1,4 @@
+import { Mail } from "lucide-react";
 import { GithubIcon as Github, LinkedinIcon as Linkedin } from "./icons";
 import { personal } from "../data/personal";
 
@@ -11,23 +12,30 @@ const socialConfig = [
     href: personal.social.github,
     icon: Github,
     label: "GitHub",
+    external: true,
   },
   {
     href: personal.social.linkedin,
     icon: Linkedin,
     label: "LinkedIn",
+    external: true,
+  },
+  {
+    href: `mailto:${personal.social.email}`,
+    icon: Mail,
+    label: "Email",
+    external: false,
   },
 ];
 
 export function SocialLinks({ size = 20, className = "" }: SocialLinksProps) {
   return (
     <div className={`flex items-center gap-3 ${className}`}>
-      {socialConfig.map(({ href, icon: Icon, label }) => (
+      {socialConfig.map(({ href, icon: Icon, label, external }) => (
         <a
           key={label}
           href={href}
-          target="_blank"
-          rel="noopener noreferrer"
+          {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
           aria-label={label}
           className="flex items-center justify-center rounded-lg p-2.5 transition-colors duration-200"
           style={{

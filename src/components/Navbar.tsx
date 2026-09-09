@@ -3,8 +3,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Moon, Sun } from "lucide-react";
 import { navItems } from "../data/navigation";
 import { useScrolled } from "../hooks/useScrolled";
+import { useActiveSection } from "../hooks/useActiveSection";
 import { Container } from "./Container";
 import { Button } from "./Button";
+
+const sectionIds = navItems.map(({ href }) => href.slice(1));
 
 interface NavbarProps {
   isDark: boolean;
@@ -14,6 +17,7 @@ interface NavbarProps {
 export function Navbar({ isDark, toggleTheme }: NavbarProps) {
   const scrolled = useScrolled(20);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const activeId = useActiveSection(sectionIds);
 
   // Close mobile menu on Escape
   useEffect(() => {
@@ -54,15 +58,30 @@ export function Navbar({ isDark, toggleTheme }: NavbarProps) {
 
           {/* Desktop Nav */}
           <div className="hidden items-center gap-1 lg:flex">
-            {navItems.map(({ label, href }) => (
-              <a
-                key={href}
-                href={href}
-                className="rounded-md px-4 py-2 text-xs font-medium text-[var(--text-secondary)] transition-colors duration-200 hover:text-[var(--text-primary)] hover:bg-[var(--bg-card)]"
-              >
-                {label}
-              </a>
-            ))}
+            {navItems.map(({ label, href }) => {
+              const isActive = href.slice(1) === activeId;
+              return (
+                <a
+                  key={href}
+                  href={href}
+                  aria-current={isActive ? "true" : undefined}
+                  className={`relative rounded-md px-4 py-2 text-xs font-medium transition-colors duration-200 ${
+                    isActive
+                      ? "text-[var(--text-primary)]"
+                      : "text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
+                  }`}
+                >
+                  {isActive && (
+                    <motion.span
+                      layoutId="nav-active-pill"
+                      className="absolute inset-0 -z-10 rounded-md bg-[var(--bg-card)] border border-[var(--border-primary)]"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                  {label}
+                </a>
+              );
+            })}
           </div>
 
           {/* Right side */}

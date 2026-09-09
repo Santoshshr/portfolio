@@ -1,4 +1,5 @@
 import { type ReactNode } from "react";
+import { ArrowRight } from "lucide-react";
 
 interface ButtonProps {
   children: ReactNode;
@@ -9,6 +10,7 @@ interface ButtonProps {
   className?: string;
   onClick?: () => void;
   ariaLabel?: string;
+  showArrow?: boolean;
 }
 
 export function Button({
@@ -20,25 +22,38 @@ export function Button({
   className = "",
   onClick,
   ariaLabel,
+  showArrow = false,
 }: ButtonProps) {
   const base =
-    "inline-flex items-center justify-center gap-2 font-medium transition-all duration-200 rounded-md whitespace-nowrap outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-primary)] focus-visible:ring-[var(--border-hover)]";
+    "group inline-flex items-center justify-center gap-2 font-medium transition-all duration-300 rounded-md whitespace-nowrap outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-primary)] focus-visible:ring-[var(--border-hover)]";
 
   const sizes = {
-    sm: "px-3 py-1.5 text-sm",
-    md: "px-5 py-2.5 text-sm",
-    lg: "px-6 py-3 text-base",
+    sm: "px-4 py-2 text-xs",
+    md: "px-6 py-3 text-sm",
+    lg: "px-8 py-4 text-base",
   };
 
   const variants = {
     primary:
-      "bg-[var(--text-primary)] text-[var(--bg-primary)] hover:opacity-90 shadow-sm font-semibold",
+      "bg-[var(--text-primary)] text-[var(--bg-primary)] hover:scale-[1.02] shadow-sm font-semibold",
     secondary:
       "bg-transparent border border-[var(--border-primary)] text-[var(--text-primary)] hover:bg-[var(--bg-card-hover)] hover:border-[var(--border-hover)]",
     ghost: "text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-card)]",
   };
 
   const classes = `${base} ${sizes[size]} ${variants[variant]} ${className}`;
+
+  const content = (
+    <>
+      {children}
+      {showArrow && (
+        <ArrowRight 
+          size={size === 'sm' ? 14 : size === 'md' ? 16 : 18} 
+          className="transition-transform duration-300 group-hover:translate-x-1" 
+        />
+      )}
+    </>
+  );
 
   if (href) {
     return (
@@ -48,7 +63,7 @@ export function Button({
         aria-label={ariaLabel}
         {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       >
-        {children}
+        {content}
       </a>
     );
   }
@@ -60,7 +75,7 @@ export function Button({
       aria-label={ariaLabel}
       type="button"
     >
-      {children}
+      {content}
     </button>
   );
 }

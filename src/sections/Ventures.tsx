@@ -12,7 +12,7 @@ export function Ventures() {
           subtitle="Ventures are ideas actively being developed into independent, sustainable businesses."
         />
 
-        <div className="grid gap-5 sm:grid-cols-2">
+        <div className="flex flex-col gap-10">
           {ventures.map((venture, i) => (
             <VentureCard key={venture.name} venture={venture} index={i} />
           ))}
